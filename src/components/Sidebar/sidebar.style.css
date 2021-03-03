@@ -90,9 +90,12 @@
 .sidebar .nav {
   margin-top: 20px;
 }
+
+.sidebar .nav li {
+  margin-bottom: 1.5rem;
+}
 .sidebar .nav li > a {
   color: #ffffff;
-  margin: 5px 15px;
   opacity: 0.86;
   border-radius: 4px;
 }
@@ -131,7 +134,7 @@
 
 .sidebar .logo,
 body > .navbar-collapse .logo {
-  padding: 10px 30px;
+  padding: 10px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .sidebar .logo p,
@@ -226,4 +229,3 @@ body > .navbar-collapse.has-image:after {
   transition-timing-function: linear, linear;
   -webkit-overflow-scrolling: touch;
 }
-

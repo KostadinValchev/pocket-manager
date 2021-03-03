@@ -4,15 +4,11 @@ import "./sidebar.style.css";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar" >
+    <div className="sidebar">
+      <div className="sidebar-background" />
       <div
-        className="sidebar-background"
-        style={{
-          backgroundImage:
-            "url(https://img.freepik.com/free-photo/wall-wallpaper-concrete-colored-painted-textured-concept_53876-31799.jpg?size=626&ext=jpg)",
-        }}
-      />
-      <div className="sidebar-wrapper">
+        className="sidebar-wrapper"
+      >
         <div className="logo d-flex align-items-center justify-content-start">
           <a href="/" className="simple-text logo-mini mx-1">
             <div className="logo-img">
@@ -22,24 +18,21 @@ const Sidebar = () => {
               />
             </div>
           </a>
-          <a
-            className="simple-text"
-            href="/"
-          >
+          <a className="simple-text" href="/">
             Pocket Manager
           </a>
         </div>
         <Nav>
           <ul>
-            <li className="active">
-              <NavLink to="/" className="nav-link" activeClassName="active">
-                {/* <i className={prop.icon} /> */}
+            <li>
+              <NavLink to="/" className="nav-link">
+                <i className="fas fa-wallet"></i>
                 <p>Lorem, ipsum.</p>
               </NavLink>
             </li>
-            <li className="active">
-              <NavLink to="/" className="nav-link" activeClassName="active">
-                {/* <i className={prop.icon} /> */}
+            <li>
+              <NavLink to="/" className="nav-link">
+                <i className="fas fa-wallet" />
                 <p>Lorem, ipsum.</p>
               </NavLink>
             </li>

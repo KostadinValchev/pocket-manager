@@ -1,0 +1,12 @@
+nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar-nav {
+  display: flex;
+}
+
+.nav-item {
+    margin: 1.5rem;
+}
