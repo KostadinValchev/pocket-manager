@@ -1,11 +1,13 @@
-import Sidebar from "./components/Sidebar/Sidebar.component";
-import BasicNavbar from "./components/Navbars/Navbar";
-import Footer from "./components/Footer/Footer";
+import Sidebar from "./components/sidebar/Sidebar.component";
+import Footer from "./components/footer/Footer.component";
+import BasicNavbar from "./components/navbars/Navbar";
 import "./App.css";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
 function App() {
   return (
     <div className="wrapper">
+      {/* <SignInAndSignUpPage /> */}
       <Sidebar />
       <div className="main-panel">
         <BasicNavbar />
