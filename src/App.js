@@ -1,20 +1,74 @@
+import React, { Component } from "react";
 import Sidebar from "./components/sidebar/Sidebar.component";
 import Footer from "./components/footer/Footer.component";
 import BasicNavbar from "./components/navbars/Navbar";
-import "./App.css";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
-function App() {
-  return (
-    <div className="wrapper">
-      {/* <SignInAndSignUpPage /> */}
-      <Sidebar />
-      <div className="main-panel">
-        <BasicNavbar />
-        <Footer />
+import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
+import "./App.css";
+
+class App extends Component {
+  state = {
+    user: {
+      id: "",
+      displayName: "",
+      email: "",
+      isLogout: true,
+    },
+  };
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          const { email, displayName } = snapShot.data();
+          const user = {
+            id: snapShot.id,
+            email,
+            displayName,
+            isLogout: true,
+          };
+          this.setState({
+            user,
+          });
+        });
+      } else {
+        const user = {
+          id: "",
+          displayName: "",
+          email: "",
+          isLogout: false,
+        };
+        this.setState({user})
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div className="wrapper">
+        {!this.state.user.isLogout ? (
+          <SignInAndSignUpPage />
+        ) : (
+          <React.Fragment>
+            <Sidebar />
+            <div className="main-panel">
+              <BasicNavbar />
+              <Footer />
+            </div>
+          </React.Fragment>
+        )}
+        {/* <SignInAndSignUpPage /> */}
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

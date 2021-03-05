@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { auth } from "../../firebase/firebase-utils";
 import "./navbar.styles.css";
 
 const BasicNavbar = () => {
@@ -20,8 +21,8 @@ const BasicNavbar = () => {
             <Nav.Item className="nav-item">
               <Nav.Link
                 className="m-0"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+                href="/"
+                onClick={() => auth.signOut()}
               >
                 <span className="no-icon">Log out</span>
               </Nav.Link>
