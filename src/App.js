@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+
+import { Route, Switch, Redirect } from "react-router-dom";
+
 import Sidebar from "./components/sidebar/Sidebar.component";
 import Footer from "./components/footer/Footer.component";
 import BasicNavbar from "./components/navbars/Navbar";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import routes from "./routes";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 import "./App.css";
@@ -42,13 +46,24 @@ class App extends Component {
           email: "",
           isLogout: false,
         };
-        this.setState({user})
+        this.setState({ user });
       }
     });
   }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
+  }
+
+  getRoutes(routes) {
+    return routes.map((prop, key) => {
+      return (
+        <Route
+          path={prop.path}
+          render={(props) => <prop.component {...props} key={key} />}
+        />
+      );
+    });
   }
 
   render() {
@@ -61,6 +76,10 @@ class App extends Component {
             <Sidebar />
             <div className="main-panel">
               <BasicNavbar />
+              <Switch>
+                {this.getRoutes(routes)}
+                <Redirect from="/" to="/summary" />
+              </Switch>
               <Footer />
             </div>
           </React.Fragment>
