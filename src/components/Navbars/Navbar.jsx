@@ -12,7 +12,7 @@ const BasicNavbar = () => {
             <Nav.Item className="nav-item">
               <Nav.Link
                 className="m-0"
-                href="#pablo"
+                href="/account"
                 onClick={(e) => e.preventDefault()}
               >
                 <span className="no-icon">Account</span>

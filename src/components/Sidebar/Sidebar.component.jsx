@@ -24,9 +24,9 @@ const Sidebar = () => {
         <Nav>
           <ul>
             <li>
-              <NavLink to="/" className="nav-link">
+              <NavLink to="/summary" className="nav-link">
                 <i className="fas fa-wallet"></i>
-                <p>Lorem, ipsum.</p>
+                <p>Summary</p>
               </NavLink>
             </li>
             <li>
