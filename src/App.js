@@ -12,13 +12,15 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import routes from "./routes";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
+import { setPreload } from "./redux/app/app.actions";
 import { setCurrentUser } from "./redux/user/user.actions";
 
 class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, setPreload } = this.props;
+    setPreload({ preload: false });
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -41,6 +43,10 @@ class App extends Component {
     this.unsubscribeFromAuth();
   }
 
+  componentDidUpdate() {
+    setPreload({ preload: true });
+  }
+
   getRoutes(routes) {
     return routes.map((prop, key) => {
       return (
@@ -56,7 +62,7 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper">
-        {!this.props.currentUser ? (
+        {!this.props.preload && !this.props.currentUser ? (
           <SignInAndSignUpPage />
         ) : (
           <React.Fragment>
@@ -78,10 +84,12 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
+  preload: state.app.preload,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setPreload: (value) => dispatch(setPreload(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

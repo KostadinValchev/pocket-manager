@@ -3,13 +3,13 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDU5MF36TqONk7dJ8MW_bJiIsZrIOVwPko",
-  authDomain: "pocket-manager-c44bd.firebaseapp.com",
-  projectId: "pocket-manager-c44bd",
-  storageBucket: "pocket-manager-c44bd.appspot.com",
-  messagingSenderId: "784886669821",
-  appId: "1:784886669821:web:e07ff1c0d4d458744af994",
-  measurementId: "G-9LXSFWPZWH",
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 };
 
 firebase.initializeApp(firebaseConfig);
