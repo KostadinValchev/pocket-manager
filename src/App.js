@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-
-import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./App.css";
 
-import Sidebar from "./components/sidebar/Sidebar.component";
-import Footer from "./components/footer/Footer.component";
-import BasicNavbar from "./components/navbars/Navbar";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import routes from "./routes";
+
+import Preload from "./components/preload/preload.component";
+import Layout from "./components/layout/layout.component";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 import { setPreload } from "./redux/app/app.actions";
@@ -20,7 +17,6 @@ class App extends Component {
 
   componentDidMount() {
     const { setCurrentUser, setPreload } = this.props;
-    setPreload({ preload: false });
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -37,47 +33,28 @@ class App extends Component {
         setCurrentUser(userAuth);
       }
     });
+    setTimeout(() => {
+      setPreload({ preload: false });
+    }, 600);
   }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
 
-  componentDidUpdate() {
-    setPreload({ preload: true });
-  }
-
-  getRoutes(routes) {
-    return routes.map((prop, key) => {
-      return (
-        <Route
-          path={prop.path}
-          render={(props) => <prop.component {...props} />}
-          key={key}
-        />
-      );
-    });
-  }
-
   render() {
+    const { currentUser, preload } = this.props;
+
     return (
-      <div className="wrapper">
-        {!this.props.preload && !this.props.currentUser ? (
-          <SignInAndSignUpPage />
+      <React.Fragment>
+        {preload === true ? (
+          <Preload />
         ) : (
-          <React.Fragment>
-            <Sidebar />
-            <BasicNavbar />
-            <div className="main-panel">
-              <Switch>
-                {this.getRoutes(routes)}
-                <Redirect from="/" to="/summary" />
-              </Switch>
-            </div>
-            <Footer />
-          </React.Fragment>
+          <div className="wrapper">
+            {preload && !currentUser ? <SignInAndSignUpPage /> : <Layout />}
+          </div>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
