@@ -5,7 +5,7 @@ import "./App.css";
 
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
-import Preload from "./components/preload/preload.component";
+import Spinner from "./components/spinner/spinner.component";
 import Layout from "./components/layout/layout.component";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
@@ -48,7 +48,7 @@ class App extends Component {
     return (
       <React.Fragment>
         {preload === true ? (
-          <Preload />
+          <Spinner />
         ) : (
           <div className="wrapper">
             {preload && !currentUser ? <SignInAndSignUpPage /> : <Layout />}

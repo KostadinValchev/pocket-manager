@@ -2,7 +2,7 @@ import React from "react";
 
 import Loader from "react-loader-spinner";
 
-const Preload = () => {
+const Spinner = () => {
   return (
     <div style={{ textAlign: "center", marginTop: "48vh" }}>
       <Loader type="Oval" color="#00BFFF" height={100} width={100} />
@@ -10,4 +10,4 @@ const Preload = () => {
   );
 };
 
-export default Preload;
+export default Spinner;

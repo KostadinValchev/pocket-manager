@@ -1,0 +1,9 @@
+.form-select-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control {
+    height: 1.9rem;
+    margin: 20px 0;
+}

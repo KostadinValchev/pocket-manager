@@ -1,0 +1,49 @@
+.add-wallet-container {
+    display: flex;
+    flex-direction: column;
+    width: 640px; 
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+}
+
+.form-img img{
+    width: 10rem;
+    display: inline-block;
+    height: 10rem;
+    margin-left: 14.5rem;
+    margin-top: -2px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.wallet-title {
+    text-align: center;
+}
+
+.add-wallet-container .form-label {
+color: grey;
+  font-size: 16px;
+  font-weight: normal;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 300ms ease all;
+}
+
+.form-label {
+    margin: 20px 0;
+}
+
+.info {
+    font-size: 12px;
+}
+
+.form-wallet-submit {
+    width: 11rem;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+}
