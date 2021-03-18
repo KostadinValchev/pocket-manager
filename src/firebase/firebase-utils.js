@@ -29,7 +29,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -37,6 +37,24 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+export const createWalletDocument = async (uid, walletData) => {
+  const { walletName, currency, cashBalance } = walletData;
+
+  if (!uid || !walletName || !currency || !cashBalance) return;
+
+  try {
+    await firestore.collection("wallets").doc().set({
+      uid,
+      walletName,
+      currency,
+      cashBalance,
+      createdAt: new Date(),
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const auth = firebase.auth();

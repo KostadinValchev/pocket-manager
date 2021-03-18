@@ -5,12 +5,14 @@ import "./App.css";
 
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
-import Spinner from "./components/spinner/spinner.component";
+import WithSpinner from "./components/with-spinner/with-spinner.component";
 import Layout from "./components/layout/layout.component";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 import { setPreload } from "./redux/app/app.actions";
 import { setCurrentUser } from "./redux/user/user.actions";
+
+const SignInAndSignUpPageWithSpinner = WithSpinner(SignInAndSignUpPage);
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -47,13 +49,13 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        {preload === true ? (
-          <Spinner />
-        ) : (
-          <div className="wrapper">
-            {preload && !currentUser ? <SignInAndSignUpPage /> : <Layout />}
-          </div>
-        )}
+        <div className="wrapper">
+          {!currentUser ? (
+            <SignInAndSignUpPageWithSpinner isLoading={preload} />
+          ) : (
+            <Layout />
+          )}
+        </div>
       </React.Fragment>
     );
   }

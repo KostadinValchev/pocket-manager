@@ -4,10 +4,15 @@ import { Form } from "react-bootstrap";
 
 import "./form-select.styles.css";
 
-const FormSelect = () => {
+const FormSelect = ({ name, onChange, otherProps }) => {
   return (
     <Form.Group className="form-select-wrapper">
-      <Form.Control className="form-control" as="select">
+      <Form.Control
+        className="form-control"
+        name={name}
+        onChange={onChange}
+        as="select"
+      >
         <option>USD - US Dollar</option>
         <option>EUR - Euro</option>
         <option>BGN - Bulgarian Lev</option>
