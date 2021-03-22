@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import Sidebar from "../sidebar/Sidebar.component";
 import Footer from "../footer/Footer.component";
@@ -8,11 +9,11 @@ import BasicNavbar from "../navbars/Navbar";
 import routes from "../../routes";
 import { getRoutes } from "./layout.utils";
 
-const Layout = () => {
+const Layout = ({ history }) => {
   return (
     <React.Fragment>
-      <Sidebar />
-      <BasicNavbar />
+      <Route component={Sidebar} />
+      <Route component={BasicNavbar} />
       <div className="main-panel">
         <Switch>
           {getRoutes(routes)}

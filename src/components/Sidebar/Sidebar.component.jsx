@@ -1,9 +1,11 @@
 import React from "react";
 import { Nav, NavLink } from "react-bootstrap";
+
 import logo from "../../assets/img/logo.png";
+
 import "./sidebar.style.css";
 
-const Sidebar = () => {
+const Sidebar = ({ history }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-background" />
@@ -11,10 +13,7 @@ const Sidebar = () => {
         <div className="logo d-flex align-items-center justify-content-start">
           <a href="/" className="simple-text logo-mini mx-1">
             <div className="logo-img">
-              <img
-                src={logo}
-                alt="..."
-              />
+              <img src={logo} alt="..." />
             </div>
           </a>
           <a className="simple-text" href="/">
@@ -24,8 +23,12 @@ const Sidebar = () => {
         <Nav>
           <ul>
             <li>
-              <NavLink to="/summary" className="nav-link">
-                <i className="fas fa-wallet"></i>
+              <NavLink
+                to="/summary"
+                className="nav-link"
+                onClick={() => history.push("/summary")}
+              >
+                <i className="fas fa-chart-line"></i>
                 <p>Summary</p>
               </NavLink>
             </li>

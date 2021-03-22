@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { createWalletDocument } from "../../../firebase/firebase-utils";
+import {
+  createWalletDocument,
+  createInterval,
+} from "../../../firebase/firebase-utils";
+
+import { addWalletToReducer } from "../../../redux/wallet/wallet.actions";
 
 import FormInput from "../form-input/form-input.component";
 import FormSelect from "../form-select/form-select.component";
@@ -20,9 +25,11 @@ class AddWallet extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { id } = this.props.currentUser;
+    const { currentUser, addWalletToReducer } = this.props;
 
-    await createWalletDocument(id, this.state);
+    let walletInfo = await createWalletDocument(currentUser.id, this.state);
+    await createInterval({ ...walletInfo });
+    addWalletToReducer({ ...walletInfo });
   };
 
   handleChange = (event) => {
@@ -80,4 +87,8 @@ const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
 });
 
-export default connect(mapStateToProps)(AddWallet);
+const mapDispatchToProps = (dispatch) => ({
+  addWalletToReducer: (wallet) => dispatch(addWalletToReducer(wallet)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddWallet);

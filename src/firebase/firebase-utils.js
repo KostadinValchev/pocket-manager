@@ -2,6 +2,8 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
+import { sentYear, setMonth } from "../utils/date";
+
 const firebaseConfig = {
   apiKey: "",
   authDomain: "",
@@ -43,18 +45,47 @@ export const createWalletDocument = async (uid, walletData) => {
   const { walletName, currency, cashBalance } = walletData;
 
   if (!uid || !walletName || !currency || !cashBalance) return;
-
+  let date = new Date();
   try {
-    await firestore.collection("wallets").doc().set({
+    let ref = firestore.collection("wallets").doc();
+    ref.set({
       uid,
       walletName,
       currency,
       cashBalance,
-      createdAt: new Date(),
+      category: {},
+      createdAt: date,
     });
+    return { walletId: ref.id, walletName, date: date };
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getWalletDocument = async (uid) => {
+  try {
+    let collectionRef = firestore.collection("wallets");
+    let docSnapshots = await collectionRef.where("uid", "==", uid).get();
+    if (!docSnapshots.empty) {
+      let wallet = docSnapshots.docs.map((doc) => doc.data());
+      return wallet[0];
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createInterval = async ({ walletId, walletName, date }) => {
+  try {
+    let interval = {
+      wid: walletId,
+      walletName,
+      [sentYear(date)]: {
+        [setMonth(date)]: {},
+      },
+    };
+    await firestore.collection("intervals").doc(walletId).set(interval);
+  } catch (error) {}
 };
 
 export const auth = firebase.auth();

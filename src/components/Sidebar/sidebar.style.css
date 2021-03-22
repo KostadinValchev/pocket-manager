@@ -91,9 +91,6 @@
   margin-top: 20px;
 }
 
-.sidebar .nav li {
-  margin-bottom: 1.5rem;
-}
 .sidebar .nav li > a {
   color: #ffffff;
   opacity: 0.86;
@@ -155,6 +152,7 @@ body > .navbar-collapse .logo .simple-text {
   color: #ffffff;
   font-weight: 400;
   line-height: 30px;
+  margin-left: 0.6rem;
 }
 
 .sidebar .logo-tim,

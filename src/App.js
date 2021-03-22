@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -36,8 +37,8 @@ class App extends Component {
       }
     });
     setTimeout(() => {
-      setPreload({ preload: false });
-    }, 600);
+      setPreload(false);
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -46,14 +47,13 @@ class App extends Component {
 
   render() {
     const { currentUser, preload } = this.props;
-
     return (
       <React.Fragment>
         <div className="wrapper">
           {!currentUser ? (
             <SignInAndSignUpPageWithSpinner isLoading={preload} />
           ) : (
-            <Layout />
+            <Route component={Layout} />
           )}
         </div>
       </React.Fragment>
