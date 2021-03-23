@@ -1,5 +1,6 @@
 import Account from "./pages/account/account";
 import Summary from "./pages/summary/summary";
+import Wallet from "./pages/wallet/wallet";
 
 const dashboardRoutes = [
   {
@@ -11,6 +12,11 @@ const dashboardRoutes = [
     path: "/summary",
     name: "Summary",
     component: Summary,
+  },
+  {
+    path: "/add-wallet",
+    name: "Wallet",
+    component: Wallet,
   },
 ];
 

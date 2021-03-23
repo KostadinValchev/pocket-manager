@@ -9,7 +9,9 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import WithSpinner from "./components/with-spinner/with-spinner.component";
 import Layout from "./components/layout/layout.component";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
+import { auth } from "./firebase/firebase-utils";
+import { createUserProfileDocument } from "./firebase/firebase-user-actions";
+
 import { setPreload } from "./redux/app/app.actions";
 import { setCurrentUser } from "./redux/user/user.actions";
 

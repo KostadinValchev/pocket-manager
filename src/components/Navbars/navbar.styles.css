@@ -16,4 +16,7 @@ nav {
   display: flex;
 }
 
-
+#basic-navbar-nav > div > div:nth-child(1) > div > div > a.dropdown-item.active,
+#basic-navbar-nav > div > div:nth-child(1) > div > div > a.dropdown-item:focus {
+  background: #1dc7ea !important;
+}

@@ -4,17 +4,17 @@ import { connect } from "react-redux";
 import {
   createWalletDocument,
   createInterval,
-} from "../../../firebase/firebase-wallet-actions";
+} from "../../firebase/firebase-wallet-actions";
 
-import { addWalletToReducer } from "../../../redux/wallet/wallet.actions";
+import { addWalletToReducer } from "../../redux/wallet/wallet.actions";
 
-import FormInput from "../form-input/form-input.component";
-import FormSelect from "../form-select/form-select.component";
-import CustomButton from "../../custom-button/custom-button.component";
+import FormInput from "../../components/forms/form-input/form-input.component";
+import FormSelect from "../../components/forms/form-select/form-select.component";
+import CustomButton from "../../components/custom-button/custom-button.component";
 
-import logo from "../../../assets/img/logo.png";
+import logo from "../../assets/img/logo.png";
 
-import "./add-wallet.styles.css";
+import "./wallet.styles.css";
 
 class AddWallet extends Component {
   state = {

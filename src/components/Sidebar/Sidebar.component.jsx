@@ -24,7 +24,6 @@ const Sidebar = ({ history }) => {
           <ul>
             <li>
               <NavLink
-                to="/summary"
                 className="nav-link"
                 onClick={() => history.push("/summary")}
               >

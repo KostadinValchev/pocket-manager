@@ -9,3 +9,8 @@ export const addWalletToReducer = (wallet) => ({
   type: WalletActionTypes.ADD_WALLET,
   payload: wallet,
 });
+
+export const getAllWallets = (wallets) => ({
+  type: WalletActionTypes.GET_WALLETS,
+  payload: wallets
+})

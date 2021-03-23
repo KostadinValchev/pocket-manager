@@ -2,7 +2,7 @@ import { WalletActionTypes } from "./wallet.types";
 
 const INITIAL_STATE = {
   currentWallet: null,
-  wallets: []
+  wallets: [],
 };
 
 const walletReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +16,11 @@ const walletReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         wallets: [...state.wallets, action.payload],
+      };
+    case WalletActionTypes.GET_WALLETS:
+      return {
+        ...state,
+        wallets: action.payload,
       };
     default:
       return state;
