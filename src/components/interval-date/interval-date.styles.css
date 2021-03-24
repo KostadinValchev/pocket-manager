@@ -1,0 +1,24 @@
+.interval {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #eff0f2;
+}
+
+.interval-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 9rem;
+  min-height: 2.5rem;
+  background: #f8f9fa;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.interval-arrow {
+  margin: 1.5rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #1dc7ea;
+}

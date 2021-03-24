@@ -1,0 +1,83 @@
+/* $red = #F15854;
+$gray = #4D4D4D;
+$blue = #5DA5DA;
+$yellow = #DECF3F;
+$purple = #B276B2;
+$orange = #FAA43A;
+// colors from http://www.mulinblog.com/a-color-palette-optimized-for-data-visualization/ */
+.char-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  font-size: 12px;
+}
+
+.chart-items {
+  flex-grow: 4;
+}
+
+.chart {
+  background: conic-gradient(
+    #f15854 0 4%,
+    #4d4d4d 0 8%,
+    #5da5da 0 17%,
+    #decf3f 0 48%,
+    #b276b2 0 54%,
+    #faa43a 0
+  );
+  border-radius: 50%;
+  width: 50%;
+  height: 0;
+  padding-top: 50%;
+  float: left;
+  padding-right: 20px;
+}
+
+.key {
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  flex-flow: wrap;
+  list-style: none;
+  border-collapse: separate;
+}
+
+.key > li {
+    display: table-row;
+    margin: 0.2rem;
+    width: 8rem;
+}
+
+.key > li > * {
+  display: table-cell;
+}
+
+.percent {
+  color: white;
+  padding: 10px 2px;
+  text-shadow: 0 0 1px black;
+  text-align: center;
+}
+.choice {
+  padding-left: 10px;
+}
+
+.red {
+  background: #f15854;
+}
+.gray {
+  background: #4d4d4d;
+}
+.blue {
+  background: #5da5da;
+}
+.yellow {
+  background: #decf3f;
+}
+.purple {
+  background: #b276b2;
+}
+.orange {
+  background: #faa43a;
+}

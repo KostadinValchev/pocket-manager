@@ -7,9 +7,15 @@ import { getWalletDocument } from "../../firebase/firebase-wallet-actions";
 import { setCurrentWallet } from "../../redux/wallet/wallet.actions";
 
 import AddWallet from "../../components/forms/wallet/add-wallet.component";
+import CircleChart from "../../components/circle-chart/circle-chart.component";
+import IntervalDate from "../../components/interval-date/interval-date.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
+import Scoreboard from "../../components/scoreboard/scoreboard.component";
+import RecordSection from "../../components/record-section/record-section.component"
 
 import { setPreload } from "../../redux/app/app.actions";
+
+import "./summary.styles.css";
 
 const AddWalletWithSpinner = WithSpinner(AddWallet);
 
@@ -27,7 +33,28 @@ class Summary extends Component {
     return (
       <div className="summary">
         {currentWallet ? (
-          <h2>Summary</h2>
+          <React.Fragment>
+            <IntervalDate />
+            <Container className="content-wraper">
+              <Row>
+                <Col className="content-section">
+                  <Scoreboard />
+                </Col>
+                <Col className="content-section"><h2>Record Section</h2></Col>
+                <Col className="content-section">
+                  <h2>Cash flow</h2>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="content-section">
+                  <CircleChart />
+                </Col>
+                <Col className="content-section">
+                  <h2>Last Records</h2>
+                </Col>
+              </Row>
+            </Container>
+          </React.Fragment>
         ) : (
           <AddWalletWithSpinner isLoading={preload} />
         )}

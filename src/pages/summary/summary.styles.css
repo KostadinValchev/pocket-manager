@@ -1,0 +1,19 @@
+.summary {
+    background-color: #eff0f2;
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.4rem;
+    min-height: 20rem;
+    margin: .8rem;
+    background: #f8f9fa;
+}
+
+.content-wraper {
+    max-width: 100rem;
+}

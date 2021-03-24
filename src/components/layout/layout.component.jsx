@@ -9,6 +9,8 @@ import BasicNavbar from "../navbars/Navbar";
 import routes from "../../routes";
 import { getRoutes } from "./layout.utils";
 
+import "./layout.styles.css";
+
 const Layout = ({ history }) => {
   return (
     <React.Fragment>
