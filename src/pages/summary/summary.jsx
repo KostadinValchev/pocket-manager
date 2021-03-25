@@ -11,7 +11,11 @@ import CircleChart from "../../components/circle-chart/circle-chart.component";
 import IntervalDate from "../../components/interval-date/interval-date.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
 import Scoreboard from "../../components/scoreboard/scoreboard.component";
-import RecordSection from "../../components/record-section/record-section.component"
+import RecordSection from "../../components/record-section/record-section.component";
+import CustomLineChart from "../../components/custom-line-chart/custom-line-chart.component";
+import CustomPieChart from "../../components/custom-pie-chart/custom-pie-chart.component";
+import CashFlow from "../../components/cash-flow/cash-flow.component";
+import CostPreview from "../../components/cost-category/cost-preview/cost-preview.component";
 
 import { setPreload } from "../../redux/app/app.actions";
 
@@ -40,17 +44,23 @@ class Summary extends Component {
                 <Col className="content-section">
                   <Scoreboard />
                 </Col>
-                <Col className="content-section"><h2>Record Section</h2></Col>
-                <Col className="content-section">
+                <Col className="costs-section">
+                  <h2>Costs By Category</h2>
+                  <CostPreview />
+                </Col>
+                <Col className="cash-flow-section">
                   <h2>Cash flow</h2>
+                  <CashFlow />
                 </Col>
               </Row>
               <Row>
                 <Col className="content-section">
-                  <CircleChart />
+                  <h2>Chart</h2>
+                  <CustomPieChart />
                 </Col>
-                <Col className="content-section">
-                  <h2>Last Records</h2>
+                <Col className="content-section center-section">
+                  <h2>Last Week</h2>
+                  <CustomLineChart />
                 </Col>
               </Row>
             </Container>

@@ -1,0 +1,19 @@
+.cf-wraper {
+  display: flex;
+  flex-direction: column;
+}
+
+.cf-header-cont {
+  text-align: left;
+}
+
+.cf-header-cont > span {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cf-label {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.8rem;
+}
