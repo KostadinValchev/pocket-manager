@@ -18,6 +18,8 @@ import {
 
 import { getAllWalletsDocuments } from "../../firebase/firebase-wallet-actions";
 
+import RecordSection from "../record-section/record-section.component";
+
 import "./navbar.styles.css";
 
 class BasicNavbar extends Component {
@@ -34,6 +36,9 @@ class BasicNavbar extends Component {
         <Container fluid>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto navbar-nav">
+              <Nav.Item className="nav-item">
+                <RecordSection />
+              </Nav.Item>
               <Nav.Item className="nav-item">
                 <DropdownButton
                   id="dropdown-basic-button"

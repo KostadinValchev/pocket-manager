@@ -14,6 +14,8 @@ import CustomButton from "../../components/custom-button/custom-button.component
 
 import logo from "../../assets/img/logo.png";
 
+import { CURRENCY } from "../../utils/wallet-constants";
+
 import "./wallet.styles.css";
 
 class AddWallet extends Component {
@@ -54,7 +56,7 @@ class AddWallet extends Component {
             required
           />
           <label className="form-label">Select Base currency</label>
-          <FormSelect name="currency" onChange={this.handleChange} />
+          <FormSelect data={CURRENCY} name="currency" onChange={this.handleChange} />
           <span className="info">
             Your base currency should ideally be the one you use most often.
           </span>

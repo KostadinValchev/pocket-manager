@@ -1,0 +1,23 @@
+.main-data-wraper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #26C04F;
+  padding: 1rem;
+}
+
+.add-wallet-container {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.8rem;
+  margin-top: 1.5rem;
+}
+
+.record-cbg {
+  text-align: center;
+}
+
+.record-md-wraper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: baseline;
+}
