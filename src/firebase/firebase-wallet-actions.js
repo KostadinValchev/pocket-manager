@@ -1,5 +1,7 @@
 import { firestore } from "./firebase-utils";
-import { sentYear, setMonth } from "../utils/date";
+import { getYear, getMonth } from "../utils/date";
+
+import DoubleLinkedList from "../common/DoubleLinkedList";
 
 export const createWalletDocument = async (uid, walletData) => {
   const { walletName, currency, cashBalance } = walletData;
@@ -59,10 +61,73 @@ export const createInterval = async ({ walletId, walletName, date }) => {
     let interval = {
       wid: walletId,
       walletName,
-      [sentYear(date)]: {
-        [setMonth(date)]: {},
+      [getYear(date)]: {
+        [getMonth(date)]: {},
       },
     };
     await firestore.collection("intervals").doc(walletId).set(interval);
   } catch (error) {}
+};
+
+export const addInterval = async (walletId, record, date) => {
+  if (!walletId || !date) return;
+  const year = getYear(date);
+  const month = getMonth(date);
+  try {
+    const intervalRef = await firestore.collection("intervals").doc(walletId);
+    record.date = date;
+    intervalRef.set(
+      {
+        [year]: {
+          [month]: {
+            [record.recordType]: {
+              [date]: record,
+            },
+          },
+        },
+      },
+      { merge: true }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllIntervals = async (walletId) => {
+  if (!walletId) return;
+  try {
+    const intervalRef = await firestore
+      .collection("intervals")
+      .doc(walletId)
+      .get();
+    const intervals = intervalRef.data();
+    delete intervals.walletName;
+    delete intervals.wid;
+
+    let collection = new DoubleLinkedList();
+
+    for (const period in intervals) {
+      const keys = Object.keys(intervals[period]);
+      keys.map((key) => {
+      return  collection.prepend({ [key]: intervals[period][key] });
+      });
+    }
+    return collection;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getInterval = async (walletId, year, month) => {
+  if (!walletId || !year || !month) return;
+
+  try {
+    const intervalRef = await firestore
+      .collection("intervals")
+      .doc(walletId)
+      .get();
+    return intervalRef.data()[year][month];
+  } catch (error) {
+    console.log(error);
+  }
 };

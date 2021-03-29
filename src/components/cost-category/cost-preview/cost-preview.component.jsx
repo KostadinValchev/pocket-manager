@@ -2,49 +2,36 @@ import React from "react";
 
 import { ProgressBar } from "react-bootstrap";
 
+import { connect } from "react-redux";
+
+import { transformToArray } from "../../../utils/intervals-utils";
+
 import "./cost-preview.styles.css";
 
-const CostPreview = () => {
+const CostPreview = ({ categories }) => {
   return (
     <div className="cp-wraper">
       <div className="cf-header-cont">
         <p>Last Month</p>
         <span>-158,60 $</span>
       </div>
-      <div className="cf-label">
-        <span>Category name</span> <span>$$$$</span>
-      </div>
-      <ProgressBar
-        style={{ marginBottom: "1rem" }}
-        variant="warning"
-        now={100}
-      />
-      <div className="cf-label">
-        <span>Category name</span> <span>$$$$</span>
-      </div>
-      <ProgressBar
-        style={{ marginBottom: "1rem" }}
-        variant="danger"
-        now={100}
-      />
-      <div className="cf-label">
-        <span>Category name</span> <span>$$$$</span>
-      </div>
-      <ProgressBar
-        style={{ marginBottom: "1rem" }}
-        variant="info"
-        now={100}
-      />
-      <div className="cf-label">
-        <span>Category name</span> <span>$$$$</span>
-      </div>
-      <ProgressBar
-        style={{ marginBottom: "1rem" }}
-        variant="success"
-        now={100}
-      />
+      {categories &&
+        transformToArray(categories.head.value, "expense").map((item) => (
+          <React.Fragment key={item.date}>
+            <div className="cf-label">
+              <span>{item.category}</span> <span>{item.amount}$</span>
+            </div>
+            <div className="meter" style={{ background: `${item.color}` }}>
+              <span></span>
+            </div>
+          </React.Fragment>
+        ))}
     </div>
   );
 };
 
-export default CostPreview;
+const mapStateToProps = (state) => ({
+  categories: state.wallet.intervals,
+});
+
+export default connect(mapStateToProps)(CostPreview);

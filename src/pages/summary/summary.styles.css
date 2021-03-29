@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  /* align-items: center; */
+  max-height: 20rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.4rem;
   min-height: 20rem;

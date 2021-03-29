@@ -1,8 +1,15 @@
 import { WalletActionTypes } from "./wallet.types";
 
+import { getMonthName } from "../../utils/date";
+
 const INITIAL_STATE = {
   currentWallet: null,
   wallets: [],
+  intervals: null,
+  currentInterval: {
+    count: 0,
+    month: getMonthName(new Date().getMonth()),
+  },
 };
 
 const walletReducer = (state = INITIAL_STATE, action) => {
@@ -21,6 +28,11 @@ const walletReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         wallets: action.payload,
+      };
+    case WalletActionTypes.SET_INTERVALS:
+      return {
+        ...state,
+        intervals: action.payload,
       };
     default:
       return state;

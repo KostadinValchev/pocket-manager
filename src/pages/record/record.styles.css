@@ -1,7 +1,6 @@
 .main-data-wraper {
   display: flex;
   flex-direction: column;
-  border: 1px solid #26C04F;
   padding: 1rem;
 }
 

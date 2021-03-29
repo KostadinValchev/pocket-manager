@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { getWalletDocument } from "../../firebase/firebase-wallet-actions";
+import {
+  getWalletDocument,
+  getAllIntervals,
+} from "../../firebase/firebase-wallet-actions";
 
-import { setCurrentWallet } from "../../redux/wallet/wallet.actions";
+import { setCurrentWallet, setIntervals } from "../../redux/wallet/wallet.actions";
 
 import AddWallet from "../../components/forms/wallet/add-wallet.component";
-import CircleChart from "../../components/circle-chart/circle-chart.component";
+// import CircleChart from "../../components/circle-chart/circle-chart.component";
 import IntervalDate from "../../components/interval-date/interval-date.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
 import Scoreboard from "../../components/scoreboard/scoreboard.component";
-import RecordSection from "../../components/record-section/record-section.component";
+// import RecordSection from "../../components/record-section/record-section.component";
 import CustomLineChart from "../../components/custom-line-chart/custom-line-chart.component";
 import CustomPieChart from "../../components/custom-pie-chart/custom-pie-chart.component";
 import CashFlow from "../../components/cash-flow/cash-flow.component";
@@ -29,6 +32,8 @@ class Summary extends Component {
   async componentDidMount() {
     const wallet = await getWalletDocument(this.props.uid);
     this.props.setCurrentWallet(wallet);
+    const intervals = await getAllIntervals(wallet.id);
+    this.props.setIntervals(intervals);
     this.props.setPreload(false);
   }
 
@@ -81,6 +86,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentWallet: (wallet) => dispatch(setCurrentWallet(wallet)),
+  setIntervals: (intervals) => dispatch(setIntervals(intervals)),
   setPreload: (value) => dispatch(setPreload(value)),
 });
 

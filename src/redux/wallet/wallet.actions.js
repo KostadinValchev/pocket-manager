@@ -12,5 +12,10 @@ export const addWalletToReducer = (wallet) => ({
 
 export const getAllWallets = (wallets) => ({
   type: WalletActionTypes.GET_WALLETS,
-  payload: wallets
-})
+  payload: wallets,
+});
+
+export const setIntervals = (intervals) => ({
+  type: WalletActionTypes.SET_INTERVALS,
+  payload: intervals,
+});
