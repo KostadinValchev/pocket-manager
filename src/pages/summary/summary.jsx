@@ -2,15 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 
+import { createStructuredSelector } from "reselect";
+
 import {
   getWalletDocument,
   getAllIntervals,
 } from "../../firebase/firebase-wallet-actions";
 
-import { setCurrentWallet, setIntervals } from "../../redux/wallet/wallet.actions";
+import { selectUserId } from "../../redux/user/user.selector";
+import { selectCurrentWallet } from "../../redux/wallet/wallet.selectors";
+import { selectPreload } from "../../redux/app/app.selector";
+
+import { setIntervals } from "../../redux/wallet/wallet.actions";
 
 import AddWallet from "../../components/forms/wallet/add-wallet.component";
-// import CircleChart from "../../components/circle-chart/circle-chart.component";
 import IntervalDate from "../../components/interval-date/interval-date.component";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
 import Scoreboard from "../../components/scoreboard/scoreboard.component";
@@ -19,8 +24,6 @@ import CustomLineChart from "../../components/custom-line-chart/custom-line-char
 import CustomPieChart from "../../components/custom-pie-chart/custom-pie-chart.component";
 import CashFlow from "../../components/cash-flow/cash-flow.component";
 import CostPreview from "../../components/cost-category/cost-preview/cost-preview.component";
-
-import { setPreload } from "../../redux/app/app.actions";
 
 import "./summary.styles.css";
 
@@ -31,10 +34,8 @@ class Summary extends Component {
 
   async componentDidMount() {
     const wallet = await getWalletDocument(this.props.uid);
-    this.props.setCurrentWallet(wallet);
     const intervals = await getAllIntervals(wallet.id);
     this.props.setIntervals(intervals);
-    this.props.setPreload(false);
   }
 
   render() {
@@ -78,16 +79,14 @@ class Summary extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentWallet: state.wallet.currentWallet,
-  uid: state.user.currentUser.id,
-  preload: state.app.preload,
+const mapStateToProps = createStructuredSelector({
+  currentWallet: selectCurrentWallet,
+  uid: selectUserId,
+  preload: selectPreload,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentWallet: (wallet) => dispatch(setCurrentWallet(wallet)),
   setIntervals: (intervals) => dispatch(setIntervals(intervals)),
-  setPreload: (value) => dispatch(setPreload(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Summary);

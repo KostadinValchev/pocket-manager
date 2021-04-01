@@ -6,10 +6,20 @@ import {
   DropdownButton,
   Dropdown,
 } from "react-bootstrap";
+
 import { Redirect } from "react-router-dom";
+
 import { connect } from "react-redux";
 
+import { createStructuredSelector } from "reselect";
+
 import { auth } from "../../firebase/firebase-utils";
+
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import {
+  selectCurrentWallet,
+  selectWallets,
+} from "../../redux/wallet/wallet.selectors";
 
 import {
   getAllWallets,
@@ -91,10 +101,10 @@ class BasicNavbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  currentWallet: state.wallet.currentWallet,
-  wallets: state.wallet.wallets,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  currentWallet: selectCurrentWallet,
+  wallets: selectWallets,
 });
 
 const mapDispatchToProps = (dispatch) => ({

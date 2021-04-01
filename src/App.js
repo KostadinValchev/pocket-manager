@@ -4,15 +4,20 @@ import { Route } from "react-router-dom";
 
 import "./App.css";
 
+import { createStructuredSelector } from "reselect";
+
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
 import WithSpinner from "./components/with-spinner/with-spinner.component";
 import Layout from "./components/layout/layout.component";
 
 import { auth } from "./firebase/firebase-utils";
+
 import { createUserProfileDocument } from "./firebase/firebase-user-actions";
 
 import { setPreload } from "./redux/app/app.actions";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { selectPreload } from "./redux/app/app.selector";
 import { setCurrentUser } from "./redux/user/user.actions";
 
 const SignInAndSignUpPageWithSpinner = WithSpinner(SignInAndSignUpPage);
@@ -21,7 +26,7 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, setPreload } = this.props;
+    const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -38,9 +43,6 @@ class App extends Component {
         setCurrentUser(userAuth);
       }
     });
-    setTimeout(() => {
-      setPreload(false);
-    }, 2000);
   }
 
   componentWillUnmount() {
@@ -63,9 +65,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  preload: state.app.preload,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  preload: selectPreload,
 });
 
 const mapDispatchToProps = (dispatch) => ({

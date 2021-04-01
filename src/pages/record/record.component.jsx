@@ -4,6 +4,8 @@ import { Container, Row } from "react-bootstrap";
 
 import { connect } from "react-redux";
 
+import { selectCurrentWallet } from "../../redux/wallet/wallet.selectors";
+
 import FormInput from "../../components/forms/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import CustomDropDownButton from "../../components/custom-dropdown-button/custom-dropdown-button.component";
@@ -126,7 +128,7 @@ class Record extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentWallet: state.wallet.currentWallet,
+  currentWallet: selectCurrentWallet(state),
 });
 
 export default connect(mapStateToProps)(Record);

@@ -2,9 +2,9 @@ import React from "react";
 import { Switch, Redirect } from "react-router-dom";
 import { Route } from "react-router-dom";
 
-import Sidebar from "../sidebar/Sidebar.component";
-import Footer from "../footer/Footer.component";
-import BasicNavbar from "../navbars/Navbar";
+import Sidebar from "../sidebar/sidebar.component";
+import Footer from "../footer/footer.component";
+import BasicNavbar from "../navbars/navbar.component";
 
 import routes from "../../routes";
 import { getRoutes } from "./layout.utils";

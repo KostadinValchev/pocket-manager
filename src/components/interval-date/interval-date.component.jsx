@@ -2,6 +2,9 @@ import React from "react";
 
 import { connect } from "react-redux";
 
+
+import { selectCurrentInterval } from "../../redux/wallet/wallet.selectors";
+
 import "./interval-date.styles.css";
 
 const IntervalDate = ({ currentInterval }) => {
@@ -20,7 +23,7 @@ const IntervalDate = ({ currentInterval }) => {
 };
 
 const mapStateToProps = (state) => ({
-  currentInterval: state.wallet.currentInterval,
+  currentInterval: selectCurrentInterval(state),
 });
 
 export default connect(mapStateToProps)(IntervalDate);

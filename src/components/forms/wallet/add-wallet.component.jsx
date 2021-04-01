@@ -6,6 +6,8 @@ import {
   createInterval,
 } from "../../../firebase/firebase-wallet-actions";
 
+import { selectCurrentUser } from "../../../redux/user/user.selector";
+
 import { addWalletToReducer } from "../../../redux/wallet/wallet.actions";
 
 import FormInput from "../form-input/form-input.component";
@@ -84,7 +86,7 @@ class AddWallet extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+  currentUser: selectCurrentUser(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

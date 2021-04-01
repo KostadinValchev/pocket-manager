@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { selectCurrentUser } from "../../redux/user/user.selector";
+
 import {
   createWalletDocument,
   createInterval,
@@ -56,7 +58,11 @@ class AddWallet extends Component {
             required
           />
           <label className="form-label">Select Base currency</label>
-          <FormSelect data={CURRENCY} name="currency" onChange={this.handleChange} />
+          <FormSelect
+            data={CURRENCY}
+            name="currency"
+            onChange={this.handleChange}
+          />
           <span className="info">
             Your base currency should ideally be the one you use most often.
           </span>
@@ -86,7 +92,7 @@ class AddWallet extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+  currentUser: selectCurrentUser(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

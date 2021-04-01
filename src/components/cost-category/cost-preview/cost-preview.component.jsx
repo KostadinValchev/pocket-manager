@@ -1,8 +1,8 @@
 import React from "react";
 
-import { ProgressBar } from "react-bootstrap";
-
 import { connect } from "react-redux";
+
+import { selectIntervals } from "../../../redux/wallet/wallet.selectors";
 
 import { transformToArray } from "../../../utils/intervals-utils";
 
@@ -31,7 +31,7 @@ const CostPreview = ({ categories }) => {
 };
 
 const mapStateToProps = (state) => ({
-  categories: state.wallet.intervals,
+  categories: selectIntervals(state),
 });
 
 export default connect(mapStateToProps)(CostPreview);
