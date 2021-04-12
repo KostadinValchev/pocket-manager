@@ -31,7 +31,10 @@ class AddWallet extends Component {
     event.preventDefault();
     const { currentUser, addWalletToReducer } = this.props;
 
-    let walletInfo = await createWalletDocument(currentUser.id, this.state);
+    let walletInfo = await createWalletDocument(currentUser.id, {
+      startingAmount: this.state.cashBalance,
+      ...this.state,
+    });
     await createInterval({ ...walletInfo });
     addWalletToReducer({ ...walletInfo });
   };

@@ -34,7 +34,8 @@ class Record extends Component {
 
     const wid = this.props.currentWallet.id;
     const record = this.state;
-
+    record.amount = Number(record.amount);
+    
     await addInterval(wid, record, new Date());
 
     this.setState({

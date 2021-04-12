@@ -36,3 +36,31 @@ export const getMonthName = (number) => {
       break;
   }
 };
+
+export const getDayOfWeek = (number) => {
+  switch (number) {
+    case 0:
+      return "Sunday";
+    case 1:
+      return "Monday";
+    case 2:
+      return "Tuesday";
+    case 3:
+      return "Wednesday";
+    case 4:
+      return "Thursday";
+    case 5:
+      return "Friday";
+    case 6:
+      return "Saturday";
+    default:
+      break;
+  }
+};
+
+
+export const toDateTime = (secs) => {
+  let t = new Date(Date.UTC(1970, 0, 1));
+  t.setUTCSeconds(secs);
+  return t;
+};

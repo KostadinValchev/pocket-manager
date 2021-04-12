@@ -4,7 +4,7 @@ import { getYear, getMonth } from "../utils/date";
 import DoubleLinkedList from "../common/DoubleLinkedList";
 
 export const createWalletDocument = async (uid, walletData) => {
-  const { walletName, currency, cashBalance } = walletData;
+  const { walletName, currency, cashBalance, startingAmount } = walletData;
 
   if (!uid || !walletName || !currency || !cashBalance) return;
   let date = new Date();
@@ -13,10 +13,13 @@ export const createWalletDocument = async (uid, walletData) => {
     ref.set({
       uid,
       walletName,
-      currency,
-      cashBalance,
+      currency: Number(currency),
+      startingAmount: Number(startingAmount),
+      cashBalance: Number(cashBalance),
       category: {},
       createdAt: date,
+      costs: 0,
+      income: 0,
     });
     return { walletId: ref.id, walletName, date: date };
   } catch (error) {
@@ -109,7 +112,7 @@ export const getAllIntervals = async (walletId) => {
     for (const period in intervals) {
       const keys = Object.keys(intervals[period]);
       keys.map((key) => {
-      return  collection.prepend({ [key]: intervals[period][key] });
+        return collection.prepend({ [key]: intervals[period][key] });
       });
     }
     return collection;

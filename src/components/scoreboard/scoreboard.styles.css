@@ -1,33 +1,17 @@
 .scoreboard-container {
-  margin-top: 3rem;
+  margin-top: 5rem;
   display: flex;
   width: 100%;
 }
 
-.square {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  height: calc(40vw * 0.2);
-}
-.circle {
-  width: 100px;
-  height: 100px;
-  border: 10px solid green;
-  border-radius: 50px;
-  position: absolute;
-}
-
-.square-value {
-  position: absolute;
-  font-size: x-large;
-  font-weight: 700;
-}
-
 .square-title {
   position: absolute;
-  top: 60%;
-  font-size: 20px;
+  top: 7rem;
+  font-size: 18px;
+  font-weight: 600;
+  left: 1.7rem;
+}
+
+.scoreboard-circle {
+  display: flex;
 }

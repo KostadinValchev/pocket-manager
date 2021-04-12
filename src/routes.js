@@ -3,9 +3,9 @@ import Summary from "./pages/summary/summary";
 import Wallet from "./pages/wallet/wallet";
 import Record from "./pages/record/record.component";
 
-import WithSpinner from "./components/with-spinner/with-spinner.component";
+// import WithSpinner from "./components/with-spinner/with-spinner.component";
 
-const SummaryWithSpinner = WithSpinner(Summary);
+// const SummaryWithSpinner = WithSpinner(Summary);
 
 const dashboardRoutes = [
   {
@@ -16,7 +16,7 @@ const dashboardRoutes = [
   {
     path: "/summary",
     name: "Summary",
-    component: SummaryWithSpinner,
+    component: Summary,
   },
   {
     path: "/add-wallet",

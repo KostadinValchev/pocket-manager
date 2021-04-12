@@ -1,26 +1,37 @@
 import React from "react";
+
+import { connect } from "react-redux";
+
+import { createStructuredSelector } from "reselect";
+
+import {
+  selectCashFlow,
+  selectCalculatedIncome,
+  selectCalculatedExpense,
+} from "../../redux/wallet/wallet.selectors";
+
 import { ProgressBar } from "react-bootstrap";
 
 import "./cash-flow.styles.css";
 
-const CashFlow = () => {
+const CashFlow = ({ cashFlow, income, spending }) => {
   return (
     <div className="cf-wraper">
       <div className="cf-header-cont">
         <p>Last 31 days</p>
-        <span>-158,60 $</span>
+        <span>-{cashFlow} $</span>
       </div>
       <div className="cf-label">
-        <span>Income</span> <span>157,00 $</span>
+        <span>Income</span> <span>{income} $</span>
       </div>
       <ProgressBar
         style={{ marginBottom: "1rem" }}
         animated
         variant="success"
-        now={45}
+        now={(income / spending) * 100}
       />
       <div className="cf-label">
-        <span>Expense</span> <span>315,60 $</span>
+        <span>Expense</span> <span>{spending} $</span>
       </div>
       <ProgressBar
         style={{ marginBottom: "1rem" }}
@@ -32,4 +43,10 @@ const CashFlow = () => {
   );
 };
 
-export default CashFlow;
+const mapStateToProps = createStructuredSelector({
+  cashFlow: selectCashFlow,
+  income: selectCalculatedIncome,
+  spending: selectCalculatedExpense,
+});
+
+export default connect(mapStateToProps)(CashFlow);

@@ -2,21 +2,24 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import { selectIntervals } from "../../../redux/wallet/wallet.selectors";
+import { createStructuredSelector } from "reselect";
 
-import { transformToArray } from "../../../utils/intervals-utils";
+import {
+  selectSpending,
+  selectExpense,
+} from "../../../redux/wallet/wallet.selectors";
 
 import "./cost-preview.styles.css";
 
-const CostPreview = ({ categories }) => {
+const CostPreview = ({ expense, spending }) => {
   return (
     <div className="cp-wraper">
       <div className="cf-header-cont">
         <p>Last Month</p>
-        <span>-158,60 $</span>
+        <span>{spending} $</span>
       </div>
-      {categories &&
-        transformToArray(categories.head.value, "expense").map((item) => (
+      {expense &&
+        expense.map((item) => (
           <React.Fragment key={item.date}>
             <div className="cf-label">
               <span>{item.category}</span> <span>{item.amount}$</span>
@@ -30,8 +33,9 @@ const CostPreview = ({ categories }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  categories: selectIntervals(state),
+const mapStateToProps = createStructuredSelector({
+  spending: selectSpending,
+  expense: selectExpense,
 });
 
 export default connect(mapStateToProps)(CostPreview);

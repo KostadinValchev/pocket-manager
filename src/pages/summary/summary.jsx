@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { Container, Row, Col } from "react-bootstrap";
 
 import { createStructuredSelector } from "reselect";
@@ -12,6 +13,7 @@ import {
 import { selectUserId } from "../../redux/user/user.selector";
 import { selectCurrentWallet } from "../../redux/wallet/wallet.selectors";
 import { selectPreload } from "../../redux/app/app.selector";
+import { selectIntervals } from "../../redux/wallet/wallet.selectors";
 
 import { setIntervals } from "../../redux/wallet/wallet.actions";
 
@@ -83,6 +85,7 @@ const mapStateToProps = createStructuredSelector({
   currentWallet: selectCurrentWallet,
   uid: selectUserId,
   preload: selectPreload,
+  categories: selectIntervals,
 });
 
 const mapDispatchToProps = (dispatch) => ({
