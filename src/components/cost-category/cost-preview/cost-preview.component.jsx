@@ -16,9 +16,9 @@ const CostPreview = ({ expense, spending }) => {
     <div className="cp-wraper">
       <div className="cf-header-cont">
         <p>Last Month</p>
-        <span>{spending} $</span>
+        <span>{spending ? spending : 0} $</span>
       </div>
-      {expense &&
+      {expense ?
         expense.map((item) => (
           <React.Fragment key={item.date}>
             <div className="cf-label">
@@ -28,7 +28,7 @@ const CostPreview = ({ expense, spending }) => {
               <span></span>
             </div>
           </React.Fragment>
-        ))}
+        )) : <h2>No Records</h2>}
     </div>
   );
 };

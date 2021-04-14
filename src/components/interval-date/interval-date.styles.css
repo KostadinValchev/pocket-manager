@@ -22,3 +22,8 @@
   cursor: pointer;
   color: #1dc7ea;
 }
+
+.disable-button {
+  pointer-events: none;
+  color: grey;
+}

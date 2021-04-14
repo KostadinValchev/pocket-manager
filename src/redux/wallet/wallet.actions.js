@@ -19,3 +19,8 @@ export const setIntervals = (intervals) => ({
   type: WalletActionTypes.SET_INTERVALS,
   payload: intervals,
 });
+
+export const changeCurrentInterval = (interval) => ({
+  type: WalletActionTypes.CHANGE_CURRENT_INTERVAL,
+  payload: interval,
+});

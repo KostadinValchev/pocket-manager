@@ -41,6 +41,7 @@ class App extends Component {
         });
       } else {
         setCurrentUser(userAuth);
+        this.props.setPreload(false);
       }
     });
   }

@@ -1,8 +1,13 @@
 import React from "react";
 
+import { connect } from "react-redux";
+
+import { setPreload } from "../../../redux/app/app.actions";
+
+import { auth, signInWithGoogle } from "../../../firebase/firebase-utils";
+
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../../custom-button/custom-button.component";
-import { auth, signInWithGoogle } from "../../../firebase/firebase-utils";
 
 import "./sign-in.styles.css";
 
@@ -24,6 +29,7 @@ class SignIn extends React.Component {
     try {
       await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: "", password: "" });
+      this.props.setPreload(true);
     } catch (error) {
       console.log(error);
     }
@@ -73,4 +79,8 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => ({
+  setPreload: (value) => dispatch(setPreload(value)),
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);

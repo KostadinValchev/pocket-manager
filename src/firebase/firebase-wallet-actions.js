@@ -65,7 +65,11 @@ export const createInterval = async ({ walletId, walletName, date }) => {
       wid: walletId,
       walletName,
       [getYear(date)]: {
-        [getMonth(date)]: {},
+        [getMonth(date)]: {
+          expense: {},
+          income: {},
+          transfer: {},
+        },
       },
     };
     await firestore.collection("intervals").doc(walletId).set(interval);

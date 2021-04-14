@@ -37,13 +37,17 @@ export const selectCashBalance = createSelector(
 );
 
 export const selectExpense = createSelector(
-  [selectIntervals],
-  (intervals) => intervals && transformToArray(intervals.head.value, "expense")
+  [selectIntervals, selectCurrentInterval],
+  (intervals, currentInterval) =>
+    intervals &&
+    transformToArray(intervals, currentInterval.count, "expense")
 );
 
 export const selectIncome = createSelector(
-  [selectIntervals],
-  (intervals) => intervals && transformToArray(intervals.head.value, "income")
+  [selectIntervals, selectCurrentInterval],
+  (intervals, currentInterval) =>
+    intervals &&
+    transformToArray(intervals, currentInterval.count, "income")
 );
 
 export const selectSpending = createSelector(

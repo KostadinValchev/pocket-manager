@@ -1,9 +1,14 @@
 import React from "react";
-import FormInput from "../form-input/form-input.component";
-import CustomButton from "../../custom-button/custom-button.component";
+
+import { connect } from "react-redux";
 
 import { auth } from "../../../firebase/firebase-utils";
 import { createUserProfileDocument } from "../../../firebase/firebase-user-actions";
+
+import FormInput from "../form-input/form-input.component";
+import CustomButton from "../../custom-button/custom-button.component";
+
+import { setPreload } from "../../../redux/app/app.actions";
 
 import "./sign-up.styles.css";
 
@@ -43,6 +48,7 @@ class SignUp extends React.Component {
         password: "",
         confirmPassword: "",
       });
+      this.props.setPreload(true);
     } catch (error) {
       console.error(error);
       alert(error.message);
@@ -101,4 +107,8 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  setPreload: (value) => dispatch(setPreload(value)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

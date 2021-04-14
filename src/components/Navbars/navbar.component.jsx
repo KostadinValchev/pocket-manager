@@ -36,8 +36,12 @@ class BasicNavbar extends Component {
   async componentDidMount() {
     const { setCurrentWallet, getAllWallets } = this.props;
     const wallets = await getAllWalletsDocuments(this.props.currentUser.id);
-    setCurrentWallet(wallets[0]);
-    getAllWallets(wallets);
+    if (!wallets) {
+      this.props.history.push("/add-wallet");
+    } else {
+      setCurrentWallet(wallets[0]);
+      getAllWallets(wallets);
+    }
   }
   render() {
     const { wallets, currentWallet, setCurrentWallet } = this.props;

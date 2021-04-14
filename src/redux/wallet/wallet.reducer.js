@@ -34,6 +34,11 @@ const walletReducer = (state = INITIAL_STATE, action) => {
         ...state,
         intervals: action.payload,
       };
+    case WalletActionTypes.CHANGE_CURRENT_INTERVAL:
+      return {
+        ...state,
+        currentInterval: action.payload,
+      };
     default:
       return state;
   }

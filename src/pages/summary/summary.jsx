@@ -36,22 +36,26 @@ class Summary extends Component {
 
   async componentDidMount() {
     const wallet = await getWalletDocument(this.props.uid);
-    const intervals = await getAllIntervals(wallet.id);
-    this.props.setIntervals(intervals);
+    if (!wallet) {
+      this.props.history.push("/add-wallet");
+    } else {
+      const intervals = await getAllIntervals(wallet.id);
+      this.props.setIntervals(intervals);
+    }
   }
 
   render() {
     const { currentWallet, preload } = this.props;
     return (
       <div className="summary">
-        {currentWallet ? (
+        {currentWallet && (
           <React.Fragment>
             <IntervalDate />
             <Container className="content-wraper">
               <Row>
                 <Col className="content-section">
                   <Scoreboard />
-                </Col>
+                  </Col>
                 <Col className="costs-section">
                   <h2>Costs By Category</h2>
                   <CostPreview />
@@ -73,8 +77,6 @@ class Summary extends Component {
               </Row>
             </Container>
           </React.Fragment>
-        ) : (
-          <AddWalletWithSpinner isLoading={preload} />
         )}
       </div>
     );

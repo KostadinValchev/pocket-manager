@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Redirect } from "react-router-dom";
 import { Route } from "react-router-dom";
 
-import Sidebar from "../sidebar/sidebar.component";
+import Sidebar from "../sidebar/Sidebar.component";
 import Footer from "../footer/footer.component";
 import BasicNavbar from "../navbars/navbar.component";
 
