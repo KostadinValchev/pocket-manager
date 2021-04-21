@@ -59,6 +59,24 @@ export const getAllWalletsDocuments = async (uid) => {
   }
 };
 
+export const changeDatabaseCurrentWallet = async (walletId, uid) => {
+  try {
+    var batch = firestore.batch();
+    let collectionRef = firestore.collection("wallets");
+    let docSnapshots = await collectionRef.where("uid", "==", uid).get();
+    if (!docSnapshots.empty) {
+      docSnapshots.docs.forEach((doc) => {
+        const docRef = firestore.collection("wallets").doc(doc.id);
+        if (doc.id === walletId) batch.update(docRef, { current: true });
+        else batch.update(docRef, { current: false });
+      });
+    }
+    batch.commit();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createInterval = async ({ walletId, walletName, date }) => {
   try {
     let interval = {
@@ -76,7 +94,7 @@ export const createInterval = async ({ walletId, walletName, date }) => {
   } catch (error) {}
 };
 
-export const addInterval = async (walletId, record, date) => {
+export const addRecord = async (walletId, record, date) => {
   if (!walletId || !date) return;
   const year = getYear(date);
   const month = getMonth(date);

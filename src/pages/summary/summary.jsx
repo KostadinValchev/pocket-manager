@@ -12,14 +12,11 @@ import {
 
 import { selectUserId } from "../../redux/user/user.selector";
 import { selectCurrentWallet } from "../../redux/wallet/wallet.selectors";
-import { selectPreload } from "../../redux/app/app.selector";
 import { selectIntervals } from "../../redux/wallet/wallet.selectors";
 
 import { setIntervals } from "../../redux/wallet/wallet.actions";
 
-import AddWallet from "../../components/forms/wallet/add-wallet.component";
 import IntervalDate from "../../components/interval-date/interval-date.component";
-import WithSpinner from "../../components/with-spinner/with-spinner.component";
 import Scoreboard from "../../components/scoreboard/scoreboard.component";
 // import RecordSection from "../../components/record-section/record-section.component";
 import CustomLineChart from "../../components/custom-line-chart/custom-line-chart.component";
@@ -29,8 +26,6 @@ import CostPreview from "../../components/cost-category/cost-preview/cost-previe
 
 import "./summary.styles.css";
 
-const AddWalletWithSpinner = WithSpinner(AddWallet);
-
 class Summary extends Component {
   state = {};
 
@@ -39,13 +34,13 @@ class Summary extends Component {
     if (!wallet) {
       this.props.history.push("/add-wallet");
     } else {
-      const intervals = await getAllIntervals(wallet.id);
+      const intervals = await getAllIntervals(this.props.currentWallet.id);
       this.props.setIntervals(intervals);
     }
   }
 
   render() {
-    const { currentWallet, preload } = this.props;
+    const { currentWallet } = this.props;
     return (
       <div className="summary">
         {currentWallet && (
@@ -55,7 +50,7 @@ class Summary extends Component {
               <Row>
                 <Col className="content-section">
                   <Scoreboard />
-                  </Col>
+                </Col>
                 <Col className="costs-section">
                   <h2>Costs By Category</h2>
                   <CostPreview />
@@ -71,7 +66,6 @@ class Summary extends Component {
                   <CustomPieChart />
                 </Col>
                 <Col className="content-section center-section">
-                  <h2>Last Week</h2>
                   <CustomLineChart />
                 </Col>
               </Row>
@@ -86,7 +80,6 @@ class Summary extends Component {
 const mapStateToProps = createStructuredSelector({
   currentWallet: selectCurrentWallet,
   uid: selectUserId,
-  preload: selectPreload,
   categories: selectIntervals,
 });
 

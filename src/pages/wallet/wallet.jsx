@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { selectCurrentUser } from "../../redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
 
 import {
   createWalletDocument,
   createInterval,
 } from "../../firebase/firebase-wallet-actions";
 
+import { setCurrentWallet } from "../../redux/wallet/wallet.actions";
+
 import { addWalletToReducer } from "../../redux/wallet/wallet.actions";
+
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { selectWallets } from "../../redux/wallet/wallet.selectors";
 
 import FormInput from "../../components/forms/form-input/form-input.component";
 import FormSelect from "../../components/forms/form-select/form-select.component";
@@ -23,20 +28,22 @@ import "./wallet.styles.css";
 class AddWallet extends Component {
   state = {
     walletName: "",
-    currency: "",
+    currency: CURRENCY[0],
     cashBalance: "",
   };
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { currentUser, addWalletToReducer } = this.props;
-
+    const { currentUser, addWalletToReducer, wallets, setCurrentWallet } = this.props;
     let walletInfo = await createWalletDocument(currentUser.id, {
       startingAmount: this.state.cashBalance,
+      current: wallets ? false : true,
       ...this.state,
     });
     await createInterval({ ...walletInfo });
     addWalletToReducer({ ...walletInfo });
+    setCurrentWallet(walletInfo);
+    this.props.history.push("/");
   };
 
   handleChange = (event) => {
@@ -94,12 +101,14 @@ class AddWallet extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: selectCurrentUser(state),
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  wallets: selectWallets,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addWalletToReducer: (wallet) => dispatch(addWalletToReducer(wallet)),
+  setCurrentWallet: (wallet) => dispatch(setCurrentWallet(wallet)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddWallet);

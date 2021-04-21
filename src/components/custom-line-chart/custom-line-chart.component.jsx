@@ -1,5 +1,11 @@
 import React from "react";
 
+import { connect } from "react-redux";
+
+import { createStructuredSelector } from "reselect";
+
+import { selectIntervals } from "../../redux/wallet/wallet.selectors";
+
 import {
   LineChart,
   Line,
@@ -10,91 +16,51 @@ import {
   Legend,
 } from "recharts";
 
+import { createExpenseChartObject } from "./custom-line-chart.utils";
+
 import "./custom-line-chart.styles.css";
 
-const data = [
-  {
-    name: "Monday",
-    food: 20,
-    shopping: 34,
-    transport: 5,
-    entertainment: 0,
-    car: 10,
-  },
-  {
-    name: "Tuesday",
-    food: 14,
-    shopping: 50,
-    transport: 5,
-    entertainment: 5,
-    car: 0,
-  },
-  {
-    name: "Wednesday",
-    food: 18,
-    shopping: 14,
-    transport: 20,
-    entertainment: 10,
-    car: 0,
-  },
-  {
-    name: "Thursday",
-    food: 7,
-    shopping: 0,
-    transport: 7.5,
-    entertainment: 0,
-    car: 15,
-  },
-  {
-    name: "Friday",
-    food: 32,
-    shopping: 42,
-    transport: 12,
-    entertainment: 50,
-    car: 0,
-  },
-  {
-    name: "Saturday",
-    food: 25,
-    shopping: 32,
-    transport: 0,
-    entertainment: 10,
-    car: 0,
-  },
-  {
-    name: "Sunday",
-    food: 14,
-    shopping: 17,
-    transport: 50,
-    entertainment: 0,
-    car: 50,
-  },
-];
-const CustomLineChart = () => {
+const CustomLineChart = ({ intervals }) => {
+  let date = new Date();
+  let categories =
+    intervals &&
+    Object.values(intervals.head.value[date.getMonth() + 1].expense);
+  let chartData = categories && createExpenseChartObject(categories);
+
   return (
-    <LineChart
-      width={600}
-      height={300}
-      data={data}
-      margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-    >
-      <Legend />
-      <Line
-        type="monotone"
-        dataKey="food"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
-      />
-      <Line type="monotone" dataKey="shopping" stroke="#82F67E" />
-      <Line type="monotone" dataKey="transport" stroke="#F569E7" />
-      <Line type="monotone" dataKey="entertainment" stroke="#69BDF5" />
-      <Line type="monotone" dataKey="car" stroke="#F5EB69" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-    </LineChart>
+    <React.Fragment>
+      <h2>Last {chartData && chartData.length} days</h2>
+      {categories ? (
+        <LineChart
+          width={700}
+          height={400}
+          data={chartData}
+          margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+        >
+          <Legend />
+          {categories.map((cat, index) => (
+            <Line
+              type="monotone"
+              dataKey={cat.category}
+              stroke={cat.color}
+              key={index}
+              // activeDot={{ r: 8 }}
+            />
+          ))}
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <XAxis dataKey="dayAndMonth" />
+          <YAxis />
+          <Tooltip />
+        </LineChart>
+      ) : (
+        <h2>No Data</h2>
+      )}
+    </React.Fragment>
   );
 };
 
-export default CustomLineChart;
+const mapStateToProps = createStructuredSelector({
+  intervals: selectIntervals,
+});
+
+export default connect(mapStateToProps)(CustomLineChart);

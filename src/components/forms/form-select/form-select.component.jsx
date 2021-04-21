@@ -15,7 +15,7 @@ const FormSelect = ({ name, data, onChange, categories, otherProps }) => {
         as="select"
       >
         {data.map((item) => {
-          return <option key={item}>{item}</option>;
+          return <option key={item} value={item}>{item}</option>;
         })}
       </Form.Control>
     </Form.Group>

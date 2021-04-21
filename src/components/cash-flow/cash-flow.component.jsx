@@ -12,6 +12,8 @@ import {
 
 import { ProgressBar } from "react-bootstrap";
 
+import { setExpenseProgress, setIncomeProgress } from "./cash-flow-utils";
+
 import "./cash-flow.styles.css";
 
 const CashFlow = ({ cashFlow, income, spending }) => {
@@ -28,7 +30,7 @@ const CashFlow = ({ cashFlow, income, spending }) => {
         style={{ marginBottom: "1rem" }}
         animated
         variant="success"
-        now={(income / spending) * 100}
+        now={setIncomeProgress(income, spending)}
       />
       <div className="cf-label">
         <span>Expense</span> <span>{spending} $</span>
@@ -37,7 +39,7 @@ const CashFlow = ({ cashFlow, income, spending }) => {
         style={{ marginBottom: "1rem" }}
         animated
         variant="danger"
-        now={100}
+        now={setExpenseProgress(spending, income)}
       />
     </div>
   );

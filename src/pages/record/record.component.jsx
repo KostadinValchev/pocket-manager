@@ -13,7 +13,7 @@ import FormTextArea from "../../components/forms/form-textarea/form-textarea.com
 import CustomButtonGroup from "../../components/custom-button-group/custom-button-group.component";
 import { RECORD_TYPE } from "./record-utils";
 
-import { addInterval } from "../../firebase/firebase-wallet-actions";
+import { addRecord } from "../../firebase/firebase-wallet-actions";
 
 import { CATEGORIES } from "../../utils/category";
 
@@ -35,8 +35,8 @@ class Record extends Component {
     const wid = this.props.currentWallet.id;
     const record = this.state;
     record.amount = Number(record.amount);
-    
-    await addInterval(wid, record, new Date());
+
+    await addRecord(wid, record, new Date());
 
     this.setState({
       color: "#FF0000",

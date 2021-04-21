@@ -11,9 +11,10 @@ export const selectWallets = createSelector(
   (wallet) => wallet.wallets
 );
 
-export const selectCurrentWallet = createSelector(
-  [selectWallets],
-  (wallets) => wallets[0]
+export const selectCurrentWallet = createSelector([selectWallets], (wallets) =>
+  wallets.length === 1
+    ? wallets[0]
+    : wallets.find((wallet) => wallet.current === true)
 );
 
 export const selectCurrentInterval = createSelector(
@@ -39,15 +40,13 @@ export const selectCashBalance = createSelector(
 export const selectExpense = createSelector(
   [selectIntervals, selectCurrentInterval],
   (intervals, currentInterval) =>
-    intervals &&
-    transformToArray(intervals, currentInterval.count, "expense")
+    intervals && transformToArray(intervals, currentInterval.count, "expense")
 );
 
 export const selectIncome = createSelector(
   [selectIntervals, selectCurrentInterval],
   (intervals, currentInterval) =>
-    intervals &&
-    transformToArray(intervals, currentInterval.count, "income")
+    intervals && transformToArray(intervals, currentInterval.count, "income")
 );
 
 export const selectSpending = createSelector(
