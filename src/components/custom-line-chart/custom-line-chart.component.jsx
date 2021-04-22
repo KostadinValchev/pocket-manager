@@ -26,7 +26,7 @@ const CustomLineChart = ({ intervals }) => {
     intervals &&
     Object.values(intervals.head.value[date.getMonth() + 1].expense);
   let chartData = categories && createExpenseChartObject(categories);
-
+  let items = [];
   return (
     <React.Fragment>
       <h2>Last {chartData && chartData.length} days</h2>
@@ -38,15 +38,21 @@ const CustomLineChart = ({ intervals }) => {
           margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
         >
           <Legend />
-          {categories.map((cat, index) => (
-            <Line
-              type="monotone"
-              dataKey={cat.category}
-              stroke={cat.color}
-              key={index}
-              // activeDot={{ r: 8 }}
-            />
-          ))}
+          {categories.map((cat, index) => {
+            if (!items.includes(cat.category)) {
+              items.push(cat.category);
+              return (
+                <Line
+                  type="monotone"
+                  dataKey={cat.category}
+                  stroke={cat.color}
+                  key={index}
+                  // activeDot={{ r: 8 }}
+                />
+              );
+            }
+            return null;
+          })}
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey="dayAndMonth" />
           <YAxis />

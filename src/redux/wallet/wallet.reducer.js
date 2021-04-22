@@ -39,6 +39,11 @@ const walletReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentInterval: action.payload,
       };
+    case WalletActionTypes.UPDATE_CASH_BALANCE:
+      return {
+        ...state,
+        cashBalance: action.payload,
+      };
     default:
       return state;
   }

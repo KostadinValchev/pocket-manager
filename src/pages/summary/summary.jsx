@@ -48,24 +48,24 @@ class Summary extends Component {
             <IntervalDate />
             <Container className="content-wraper">
               <Row>
-                <Col className="content-section">
+                <Col className="content-section custom-box-shadow">
                   <Scoreboard />
                 </Col>
-                <Col className="costs-section">
+                <Col className="costs-section custom-box-shadow">
                   <h2>Costs By Category</h2>
                   <CostPreview />
                 </Col>
-                <Col className="cash-flow-section">
+                <Col className="cash-flow-section custom-box-shadow">
                   <h2>Cash flow</h2>
                   <CashFlow />
                 </Col>
               </Row>
               <Row>
-                <Col className="content-section">
+                <Col className="content-section custom-box-shadow">
                   <h2>Chart</h2>
                   <CustomPieChart />
                 </Col>
-                <Col className="content-section center-section">
+                <Col className="content-section center-section custom-box-shadow">
                   <CustomLineChart />
                 </Col>
               </Row>

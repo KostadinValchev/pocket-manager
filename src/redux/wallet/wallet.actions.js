@@ -24,3 +24,8 @@ export const changeCurrentInterval = (interval) => ({
   type: WalletActionTypes.CHANGE_CURRENT_INTERVAL,
   payload: interval,
 });
+
+export const updateCashBalance = (value) => ({
+  type: WalletActionTypes.UPDATE_CASH_BALANCE,
+  payload: value,
+})

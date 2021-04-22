@@ -61,7 +61,7 @@ export const getAllWalletsDocuments = async (uid) => {
 
 export const changeDatabaseCurrentWallet = async (walletId, uid) => {
   try {
-    var batch = firestore.batch();
+    let batch = firestore.batch();
     let collectionRef = firestore.collection("wallets");
     let docSnapshots = await collectionRef.where("uid", "==", uid).get();
     if (!docSnapshots.empty) {
@@ -152,6 +152,30 @@ export const getInterval = async (walletId, year, month) => {
       .doc(walletId)
       .get();
     return intervalRef.data()[year][month];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateBalance = async (walletId, uid, value, type) => {
+  try {
+    let batch = firestore.batch();
+    let collectionRef = firestore.collection("wallets");
+    let docSnapshots = await collectionRef.where("uid", "==", uid).get();
+    if (!docSnapshots.empty) {
+      docSnapshots.docs.forEach((doc) => {
+        const docRef = firestore.collection("wallets").doc(doc.id);
+        const docData = doc.data();
+        if (doc.id === walletId) {
+          type === "income"
+            ? batch.update(docRef, { cashBalance: docData.cashBalance + value })
+            : batch.update(docRef, {
+                cashBalance: docData.cashBalance - value,
+              });
+        }
+      });
+    }
+    batch.commit();
   } catch (error) {
     console.log(error);
   }

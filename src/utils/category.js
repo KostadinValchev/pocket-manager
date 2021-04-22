@@ -1,27 +1,27 @@
 export const CATEGORIES = [
   {
     categoryName: "Food & Drinks",
-    color: "#FF4444",
+    color: "#0088FE",
     icon: "fa-utensils",
   },
   {
     categoryName: "Shopping",
-    color: "#5AF2E3",
+    color: "#00C49F",
     icon: "fa-gift",
   },
   {
     categoryName: "Housing",
-    color: "#EF9740",
+    color: "#FFBB28",
     icon: "fa-home",
   },
   {
     categoryName: "Transportation",
-    color: "#CACACA",
+    color: "#FF8042",
     icon: "fa-bus",
   },
   {
     categoryName: "Vehicle",
-    color: "#BA50A9",
+    color: "#F569E7",
     icon: "fa-car",
   },
   {
@@ -31,17 +31,17 @@ export const CATEGORIES = [
   },
   {
     categoryName: "Communication, PC",
-    color: "#2E58FD",
+    color: "#87CEEB",
     icon: "fa-laptop",
   },
   {
     categoryName: "Financial expenses",
-    color: "#42B969",
+    color: "#FFD700",
     icon: "fa-landmark",
   },
   {
     categoryName: "Income",
-    color: "#FFF953",
+    color: "#00FA9A",
     icon: "fa-dollar-sign",
   },
   {

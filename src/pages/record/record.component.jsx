@@ -5,6 +5,7 @@ import { Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import { selectCurrentWallet } from "../../redux/wallet/wallet.selectors";
+import { updateCashBalance } from "../../redux/wallet/wallet.actions";
 
 import FormInput from "../../components/forms/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
@@ -13,7 +14,10 @@ import FormTextArea from "../../components/forms/form-textarea/form-textarea.com
 import CustomButtonGroup from "../../components/custom-button-group/custom-button-group.component";
 import { RECORD_TYPE } from "./record-utils";
 
-import { addRecord } from "../../firebase/firebase-wallet-actions";
+import {
+  addRecord,
+  updateBalance,
+} from "../../firebase/firebase-wallet-actions";
 
 import { CATEGORIES } from "../../utils/category";
 
@@ -31,12 +35,16 @@ class Record extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    const { id, uid, cashBalance } = this.props.currentWallet;
 
-    const wid = this.props.currentWallet.id;
     const record = this.state;
     record.amount = Number(record.amount);
 
-    await addRecord(wid, record, new Date());
+    await addRecord(id, record, new Date());
+    await updateBalance(id, uid, record.amount, record.recordType);
+    record.recordType === "income"
+      ? this.props.updateCashBalance(cashBalance + record.amount)
+      : this.props.updateCashBalance(cashBalance - record.amount);
 
     this.setState({
       color: "#FF0000",
@@ -132,4 +140,8 @@ const mapStateToProps = (state) => ({
   currentWallet: selectCurrentWallet(state),
 });
 
-export default connect(mapStateToProps)(Record);
+const mapDispatchToProps = (dispatch) => ({
+  updateCashBalance: (value) => dispatch(updateCashBalance(value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Record);

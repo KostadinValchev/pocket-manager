@@ -48,3 +48,8 @@
 .text-align-center {
   text-align: center;
 }
+
+.custom-box-shadow {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 10px 12px rgba(0, 0, 0, 0.22);
+}
+
