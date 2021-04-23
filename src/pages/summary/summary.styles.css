@@ -2,6 +2,13 @@
   background-color: #eff0f2;
 }
 
+.summary-title {
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 0.1rem solid #EBEBEB;
+  text-shadow: 3px 4px 7px rgb(182 187 191 / 80%);
+}
+
 .content-section {
   display: flex;
   flex-direction: column;

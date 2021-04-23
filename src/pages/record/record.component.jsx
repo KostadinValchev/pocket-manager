@@ -69,12 +69,12 @@ class Record extends Component {
     this.setState({ [name]: value });
   };
 
-  handleCategory = (category, color) => {
-    if (!category || !color) return;
-
+  handleCategory = (category, color, icon) => {
+    if (!category || !color || icon) return;
     this.setState({
       category: category.charAt(0).toLowerCase() + category.slice(1),
       color,
+      icon
     });
   };
 

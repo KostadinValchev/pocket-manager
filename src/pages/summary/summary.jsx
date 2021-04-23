@@ -22,7 +22,7 @@ import Scoreboard from "../../components/scoreboard/scoreboard.component";
 import CustomLineChart from "../../components/custom-line-chart/custom-line-chart.component";
 import CustomPieChart from "../../components/custom-pie-chart/custom-pie-chart.component";
 import CashFlow from "../../components/cash-flow/cash-flow.component";
-import CostPreview from "../../components/cost-category/cost-preview/cost-preview.component";
+import LastRecords from "../../components/last-records/last-records.component";
 
 import "./summary.styles.css";
 
@@ -49,20 +49,21 @@ class Summary extends Component {
             <Container className="content-wraper">
               <Row>
                 <Col className="content-section custom-box-shadow">
+                  <h4 className="summary-title">Scoreboard</h4>
                   <Scoreboard />
                 </Col>
                 <Col className="costs-section custom-box-shadow">
-                  <h2>Costs By Category</h2>
-                  <CostPreview />
+                  <h4 className="summary-title">Last Records</h4>
+                  <LastRecords />
                 </Col>
                 <Col className="cash-flow-section custom-box-shadow">
-                  <h2>Cash flow</h2>
+                  <h4 className="summary-title">Cash flow</h4>
                   <CashFlow />
                 </Col>
               </Row>
               <Row>
                 <Col className="content-section custom-box-shadow">
-                  <h2>Chart</h2>
+                  <h4 className="summary-title">Chart</h4>
                   <CustomPieChart />
                 </Col>
                 <Col className="content-section center-section custom-box-shadow">

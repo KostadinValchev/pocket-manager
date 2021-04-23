@@ -1,0 +1,64 @@
+.cp-wraper {
+  flex: 1;
+  overflow: auto;
+  padding-bottom: 1rem;
+}
+
+.cf-label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.lr-summary-wrapper {
+  padding: .2rem;
+  margin-right: .4rem;
+  border-bottom: 1px solid grey;
+}
+
+.lr-summary-date {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.last-rec-icon {
+  display: inline-block;
+  font-size: 1.1rem;
+  width: 2.5rem;
+  height: 1.8rem;
+  text-align: center;
+  line-height: 1.3rem;
+  padding: 0.3rem;
+  border-radius: 0.7rem;
+}
+
+.meter {
+  box-sizing: content-box;
+  height: 4px;
+  position: relative;
+  border-radius: 25px;
+  padding: 5px;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkgrey;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
+}

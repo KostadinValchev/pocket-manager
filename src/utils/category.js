@@ -50,5 +50,3 @@ export const CATEGORIES = [
     icon: "fa-bars",
   },
 ];
-
-<i class="fas fa-utensils"></i>;

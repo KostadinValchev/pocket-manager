@@ -25,7 +25,7 @@ const CustomDropDownButton = ({
               key={key}
               name={label}
               onClick={() =>
-                handleChange(category.categoryName, category.color)
+                handleChange(category.categoryName, category.color, category.icon)
               }
             >
               <i

@@ -2,7 +2,7 @@ import { createSelector } from "reselect";
 
 import { transformToArray } from "../../utils/intervals-utils";
 
-import { calculateCosts } from "../../components/cost-category/cost-preview/cost.utils";
+import { calculateCosts } from "../../components/last-records/last-records.utils";
 
 const selectWallet = (state) => state.wallet;
 

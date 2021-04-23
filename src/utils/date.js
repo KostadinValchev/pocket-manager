@@ -58,9 +58,12 @@ export const getDayOfWeek = (number) => {
   }
 };
 
-
 export const toDateTime = (secs) => {
   let t = new Date(Date.UTC(1970, 0, 1));
   t.setUTCSeconds(secs);
   return t;
+};
+
+export const getYMHMS = (date) => {
+  return `${date.getUTCFullYear()} / ${getMonthName(date.getMonth())} / ${date.getDate()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 };
