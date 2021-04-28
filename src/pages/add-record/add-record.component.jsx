@@ -21,9 +21,9 @@ import {
 
 import { CATEGORIES } from "../../utils/category";
 
-import "./record.styles.css";
+import "./add-record.styles.css";
 
-class Record extends Component {
+class AddRecord extends Component {
   state = {
     recordColor: "#FF0000",
     color: "",
@@ -70,7 +70,8 @@ class Record extends Component {
   };
 
   handleCategory = (category, color, icon) => {
-    if (!category || !color || icon) return;
+    if (!category || !color || !icon) return;
+    
     this.setState({
       category: category.charAt(0).toLowerCase() + category.slice(1),
       color,
@@ -144,4 +145,4 @@ const mapDispatchToProps = (dispatch) => ({
   updateCashBalance: (value) => dispatch(updateCashBalance(value)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Record);
+export default connect(mapStateToProps, mapDispatchToProps)(AddRecord);

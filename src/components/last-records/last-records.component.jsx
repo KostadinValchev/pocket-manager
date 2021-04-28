@@ -6,6 +6,8 @@ import { createStructuredSelector } from "reselect";
 
 import { toDateTime, getYMHMS } from "../../utils/date";
 
+import { Link } from "react-router-dom";
+
 import {
   selectSpending,
   selectExpense,
@@ -15,14 +17,18 @@ import "./last-records.styles.css";
 
 const LastRecords = ({ expense, spending }) => {
   return (
-    <div className="cp-wraper">
-      <div className="cf-header-cont">
-        <p>Last Month</p>
-        <span>{spending ? spending : 0} $</span>
+    <React.Fragment>
+      <div className="title-wraper">
+        <h4 className="summary-title">Last Records</h4>
+        <Link to="/records" className="records-link">Records</Link>
       </div>
-      {expense ? (
-        expense.map((item) => (
-       
+      <div className="cp-wraper">
+        <div className="cf-header-cont">
+          <p>Last Month</p>
+          <span>{spending ? spending : 0} $</span>
+        </div>
+        {expense ? (
+          expense.map((item) => (
             <div className="lr-summary-wrapper" key={item.date}>
               <div className="cf-label">
                 <i
@@ -35,14 +41,16 @@ const LastRecords = ({ expense, spending }) => {
                 </span>{" "}
                 <span style={{ color: "#fe3b2c" }}>- {item.amount} $</span>
               </div>
-              <span className="lr-summary-date">{getYMHMS(toDateTime(item.date.seconds))}</span>
+              <span className="lr-summary-date">
+                {getYMHMS(toDateTime(item.date.seconds))}
+              </span>
             </div>
-     
-        ))
-      ) : (
-        <h2>No Records</h2>
-      )}
-    </div>
+          ))
+        ) : (
+          <h2>No Records</h2>
+        )}
+      </div>
+    </React.Fragment>
   );
 };
 

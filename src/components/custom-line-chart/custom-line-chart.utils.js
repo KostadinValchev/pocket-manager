@@ -42,7 +42,7 @@ export const createExpenseChartObject = (categories) => {
   categories &&
     categories.forEach((cat) => {
       let day = toDateTime(cat.date.seconds).getDate();
-      if (day >= barrier) {
+      if (day > barrier) {
         let currentCategory = chartData.find((cat) => cat.day === day);
         currentCategory[cat.category] += cat.amount;
       }

@@ -38,7 +38,7 @@ const CustomLineChart = ({ intervals }) => {
           margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
         >
           <Legend />
-          {categories.map((cat, index) => {
+          {categories && categories.map((cat, index) => {
             if (!items.includes(cat.category)) {
               items.push(cat.category);
               return (

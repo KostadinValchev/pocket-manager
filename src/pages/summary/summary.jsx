@@ -53,7 +53,6 @@ class Summary extends Component {
                   <Scoreboard />
                 </Col>
                 <Col className="costs-section custom-box-shadow">
-                  <h4 className="summary-title">Last Records</h4>
                   <LastRecords />
                 </Col>
                 <Col className="cash-flow-section custom-box-shadow">

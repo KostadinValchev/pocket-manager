@@ -32,9 +32,12 @@ const Sidebar = ({ history }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" className="nav-link">
-                <i className="fas fa-wallet" />
-                <p>Lorem, ipsum.</p>
+              <NavLink
+                className="nav-link"
+                onClick={() => history.push("/records")}
+              >
+                <i className="fas fa-history" />
+                <p>Records</p>
               </NavLink>
             </li>
           </ul>

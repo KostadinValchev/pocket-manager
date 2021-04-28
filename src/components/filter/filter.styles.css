@@ -1,0 +1,14 @@
+.form-group {
+  width: 16rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.filter-form-control {
+  max-width: 9rem;
+  height: 3.2rem;
+}
+
+.filter-label {
+  margin-top: 2.1rem;
+}

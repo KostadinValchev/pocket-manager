@@ -1,3 +1,22 @@
+.title-wraper {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.1rem solid #ebebeb;
+  margin-bottom: 0.8rem;
+}
+
+.records-link {
+  align-self: center;
+  color: lightseagreen;
+  border-radius: 2rem;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.records-link:hover {
+  background-color: #eff0f2;
+}
+
 .cp-wraper {
   flex: 1;
   overflow: auto;
@@ -10,9 +29,14 @@
 }
 
 .lr-summary-wrapper {
-  padding: .2rem;
-  margin-right: .4rem;
+  padding: 0.2rem;
+  margin-right: 0.4rem;
   border-bottom: 1px solid grey;
+}
+
+.lr-summary-wrapper:hover {
+  background-color: lightcyan;
+  border-radius: 9.8px;
 }
 
 .lr-summary-date {
